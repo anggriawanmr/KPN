@@ -1,0 +1,146 @@
+﻿@model AddCatViewModel
+@{
+    // Get the top 5 foods
+    var topFoods = Model.Cats
+        .GroupBy(c => c.Type)
+        .Select(g => new { Type = g.Key, Amount = g.Sum(c => c.Amount) })
+        .OrderByDescending(a => a.Amount)
+        .Take(5);
+}
+
+<h1>Cats</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Type</th>
+            <th>Colour</th>
+            <th>Food</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cat in Model.Cats)
+        {
+            <tr>
+                <td>@cat.Id</td>
+                <td>@cat.Name</td>
+                <td>@cat.Gender</td>
+                <td>@cat.Type</td>
+                <td>@cat.Colour</td>
+                <td>@cat.Food</td>
+                <td><a href="Cats/View/@cat.Id">View</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h1>Cat's Type</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Gender</th>
+            <th>Number of Cats</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var count in Model.CatGenderTypeCounts)
+        {
+            <tr>
+                <td>@count.Type</td>
+                <td>@count.Gender</td>
+                <td>@count.Count</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h1>Cat's Type Pivot</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Gender</th>
+            <th>Persian</th>
+            <th>Mainecoon</th>
+            <th>Sphynx</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PivotTable)
+        {
+            <tr>
+                <td>@item.Gender</td>
+                <td>@item.Persian</td>
+                <td>@item.Mainecoon</td>
+                <td>@item.Sphynx</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h1>Cat's Food</h1>
+
+<table class="table">
+    <tr>
+        <th>Type</th>
+        <th>Food</th>
+        <th>Amount (kg)</th>
+    </tr>
+    @foreach (var foodAmount in Model.CatFoodAmounts)
+    {
+        <tr>
+            <td>@foodAmount.Type</td>
+            <td>@foodAmount.Food</td>
+            <td>@foodAmount.Amount</td>
+        </tr>
+    }
+</table>
+
+<h1>Cat's Food Pivot</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Gender</th>
+            <th>Persian</th>
+            <th>Sphynx</th>
+            <th>Mainecoon</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CatFoodPivotTable)
+        {
+            <tr>
+                <td>@item.Food</td>
+                <td>@item.Persian</td>
+                <td>@item.Sphynx</td>
+                <td>@item.Mainecoon</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h1>Top 5 Food Spent</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Amount (kg)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var topFood in topFoods)
+        {
+            <tr>
+                <td>@topFood.Type</td>
+                <td>@topFood.Amount</td>
+            </tr>
+        }
+    </tbody>
+</table>

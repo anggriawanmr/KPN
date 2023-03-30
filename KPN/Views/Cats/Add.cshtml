@@ -1,0 +1,34 @@
+﻿@model KPN.Models.AddCatViewModel
+
+@{
+}
+
+<h1>Add Cats</h1>
+<form method="post" action="Add" class="mt-5">
+    
+    <div class="mb-3">
+        <label for="" class="form-label">Name</label>
+        <input type="text" class="form-control" asp-for="Name">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Gender</label>
+        <input type="text" class="form-control" asp-for="Gender">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Type</label>
+        <input type="text" class="form-control" asp-for="Type">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Colour</label>
+        <input type="text" class="form-control" asp-for="Colour">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Food</label>
+        <input type="text" class="form-control" asp-for="Food">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Number of Food (in Kg)</label>
+        <input type="number" class="form-control" asp-for="Amount">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
